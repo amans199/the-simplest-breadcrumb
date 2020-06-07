@@ -43,7 +43,15 @@
 ```sh
 npm install the-simplest-breadcrumb --save
 ```
-
+2.
+```sh
+import TheSimplestBreadcrumb from 'the-simplest-breadcrumb'
+```
+3.
+just copy and paste it wherever you want in your blade , vue , angular or react files
+```sh
+<the-simplest-breadcrumb></the-simplest-breadcrumb>
+```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
