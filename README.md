@@ -48,7 +48,7 @@ npm install the-simplest-breadcrumb --save
 import TheSimplestBreadcrumb from 'the-simplest-breadcrumb'
 ```
 3.
-just copy and paste it wherever you want in your blade , vue , angular or react files
+just use it wherever you want in your blade , vue , angular or react files
 ```sh
 <the-simplest-breadcrumb></the-simplest-breadcrumb>
 ```
