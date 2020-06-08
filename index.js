@@ -50,4 +50,27 @@ function getBreadCrumbItems() {
   return breadcrumbItems;
 }
 
-module.exports.getBreadCrumbItems = getBreadCrumbItems;
+function breadcrumbMaster() {
+  var breadcrumb199List = document.getElementById('breadcrumb199__list'),
+    splitterData = breadcrumb199__list.dataset.splitter,
+    marginItems = breadcrumb199__list.dataset.marginItems,
+    selectedColor = breadcrumb199__list.dataset.selectedColor;
+  breadcrumb199List.style.listStyle = "none";
+  breadcrumb199List.style.display = "flex";
+  for (var i = 0; i < getBreadCrumbItems().length; i++) {
+    var breadcrumb199ListItem = document.createElement("li");
+    breadcrumb199ListItem.className = "breadcrumb199__list--item";
+    var breadcrumb199ListItemHref = document.createElement("a");
+    breadcrumb199ListItem.appendChild(breadcrumb199ListItemHref);
+    breadcrumb199ListItemHref.href = getBreadCrumbItems()[i].url;
+    breadcrumb199ListItemHref.appendChild(document.createTextNode(getBreadCrumbItems()[i].name + splitterData));
+    breadcrumb199List.appendChild(breadcrumb199ListItem);
+  }
+  document.querySelectorAll('.breadcrumb199__list--item').forEach(function (breadcrumb199ListItem) {
+    breadcrumb199ListItem.style.margin = marginItems;
+  });
+  document.querySelector(".breadcrumb199__list--item:last-child a").setAttribute('style', 'color:' + selectedColor + ' !important');
+}
+window.onload = breadcrumbMaster();
+
+module.exports.breadcrumbMaster = breadcrumbMaster;

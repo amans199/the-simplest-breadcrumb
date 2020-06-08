@@ -1,0 +1,22 @@
+{
+  "name": "the-simplest-breadcrumb",
+  "version": "1.0.0",
+  "description": "The simplest Breadcrumb you will ever use",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amans199/the-simplest-breadcrumb.git"
+  },
+  "keywords": [
+    "breadcrumb"
+  ],
+  "author": "Ahmed Mansour ( amans199 )",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amans199/the-simplest-breadcrumb/issues"
+  },
+  "homepage": "https://github.com/amans199/the-simplest-breadcrumb#readme"
+}
