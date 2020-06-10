@@ -52,19 +52,22 @@ import TheSimplestBreadcrumb from 'the-simplest-breadcrumb'
     <img src="images/screenshot.png" alt="Logo">
   </a>
 
+
 just create any html tag eg: `ul` or `div` and insert the required data as following 
-```sh
-    <ul id="breadcrumb199__list" data-splitter=" / " data-margin-items="2px" data-selected-color="#000"></ul>
-```
-`data-splitter` eg :  / , | , \ , *,...;
-`data-margin-items` : the margin between each item and the following one. preferably : 2px;
-`data-selected-color` eg : red, #000, #eeeeee, ....;
-*then*
-add this line to your app.js
+<br />
+
+ `<ul id="breadcrumb199__list" data-splitter=" / " data-margin-items="2px" data-selected-color="#000"></ul>`
+<br />
+`data-splitter` eg :  / , | , \ , *,...; <br />
+`data-margin-items` : the margin between each item and the following one. preferably : 2px; <br />
+`data-selected-color` eg : red, #000, #eeeeee, ....; <br />
+<br />
+**then**
+add this line to your app.js <br />
 ```sh
 require('the-simplest-breadcrumb')
 ```
-
+<br />
 See the [open issues](https://github.com/amans199/the-simplest-breadcrumb/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
