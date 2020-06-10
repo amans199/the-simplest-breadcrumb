@@ -49,7 +49,7 @@ import TheSimplestBreadcrumb from 'the-simplest-breadcrumb'
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-  <a href="https://github.com/amans199/the-simplest-breadcrumb" align="center">
+  <a href="https://github.com/amans199/the-simplest-breadcrumb">
     <img src="images/screenshot.png" alt="Logo">
   </a>
 <br />
