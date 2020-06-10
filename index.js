@@ -51,10 +51,10 @@ function getBreadCrumbItems() {
 }
 
 function breadcrumbMaster() {
-  var breadcrumb199List = document.getElementById('breadcrumb199__list'),
-    splitterData = breadcrumb199__list.dataset.splitter,
-    marginItems = breadcrumb199__list.dataset.marginItems,
-    selectedColor = breadcrumb199__list.dataset.selectedColor;
+  var breadcrumb199List = document.getElementById('breadcrumb199__list');
+  var splitterData = breadcrumb199List.dataset.splitter,
+    marginItems = breadcrumb199List.dataset.marginItems,
+    selectedColor = breadcrumb199List.dataset.selectedColor;
   breadcrumb199List.style.listStyle = "none";
   breadcrumb199List.style.display = "flex";
   for (var i = 0; i < getBreadCrumbItems().length; i++) {
@@ -71,6 +71,6 @@ function breadcrumbMaster() {
   });
   document.querySelector(".breadcrumb199__list--item:last-child a").setAttribute('style', 'color:' + selectedColor + ' !important');
 }
-window.onload = breadcrumbMaster();
+// window.onload = breadcrumbMaster();
 
 module.exports.breadcrumbMaster = breadcrumbMaster;

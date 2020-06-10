@@ -39,30 +39,33 @@
 
 ### Installation
 
-1. 
 ```sh
 npm install the-simplest-breadcrumb --save
 ```
-2.
 ```sh
 import TheSimplestBreadcrumb from 'the-simplest-breadcrumb'
 ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+  <a href="https://github.com/amans199/the-simplest-breadcrumb">
+    <img src="images/screenshot.png" alt="Logo">
+  </a>
 
-just create any html tag you want like ul or div and insert the required data as following 
+just create any html tag eg: `ul` or `div` and insert the required data as following 
 ```sh
     <ul id="breadcrumb199__list" data-splitter=" / " data-margin-items="2px" data-selected-color="#000"></ul>
 ```
-
 `data-splitter` eg :  / , | , \ , *,...;
 `data-margin-items` : the margin between each item and the following one. preferably : 2px;
 `data-selected-color` eg : red, #000, #eeeeee, ....;
-
+*then*
+add this line to your app.js
+```sh
+require('the-simplest-breadcrumb')
+```
 
 See the [open issues](https://github.com/amans199/the-simplest-breadcrumb/issues) for a list of proposed features (and known issues).
-
 
 <!-- CONTRIBUTING -->
 ## Contributing
