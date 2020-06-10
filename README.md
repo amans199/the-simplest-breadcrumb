@@ -48,16 +48,15 @@ import TheSimplestBreadcrumb from 'the-simplest-breadcrumb'
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
   <a href="https://github.com/amans199/the-simplest-breadcrumb">
     <img src="images/screenshot.png" alt="Logo">
   </a>
-<br />
+
+
 just create any html tag eg: `ul` or `div` and insert the required data as following 
 <br />
-```sh
-    <ul id="breadcrumb199__list" data-splitter=" / " data-margin-items="2px" data-selected-color="#000"></ul>
-```
+
+ `<ul id="breadcrumb199__list" data-splitter=" / " data-margin-items="2px" data-selected-color="#000"></ul>`
 <br />
 `data-splitter` eg :  / , | , \ , *,...; <br />
 `data-margin-items` : the margin between each item and the following one. preferably : 2px; <br />
