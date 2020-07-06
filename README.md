@@ -60,7 +60,8 @@ just create any html tag eg: `ul` or `div` and with an id
 <br />
 <br />
 **then** Use it as below
-`
+<br />
+```
   BreadcrumbMaster({
     wrapper_id: 'breadcrumb199__list', // the id of the wrapper you want to use
     splitter: '/', // the symbol you want to use between the breadcrumb items
@@ -80,7 +81,7 @@ just create any html tag eg: `ul` or `div` and with an id
       { index: 4, text: 'fourthElement', url: '#' },
     ]
   })
-  `
+```
 <br />
 <br />
 See the [open issues](https://github.com/amans199/the-simplest-breadcrumb/issues) for a list of proposed features (and known issues).
