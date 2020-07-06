@@ -43,7 +43,7 @@
 npm install the-simplest-breadcrumb --save
 ```
 ```sh
-import TheSimplestBreadcrumb from 'the-simplest-breadcrumb'
+import BreadcrumbMaster from 'the-simplest-breadcrumb'
 ```
 
 <!-- USAGE EXAMPLES -->
@@ -53,20 +53,33 @@ import TheSimplestBreadcrumb from 'the-simplest-breadcrumb'
   </a>
 
 
-just create any html tag eg: `ul` or `div` and insert the required data as following 
+just create any html tag eg: `ul` or `div` and with an id
 <br />
 
- `<ul id="breadcrumb199__list" data-splitter=" / " data-margin-items="2px" data-selected-color="#000"></ul>`
+ `<ul id="breadcrumb199__list"></ul>`
 <br />
-`data-splitter` eg :  / , | , \ , *,...; <br />
-`data-margin-items` : the margin between each item and the following one. preferably : 2px; <br />
-`data-selected-color` eg : red, #000, #eeeeee, ....; <br />
 <br />
-**then**
-add this line to your app.js <br />
-```sh
-require('the-simplest-breadcrumb')
-```
+**then** Use it as below
+  BreadcrumbMaster({
+    wrapper_id: 'breadcrumb199__list', // the id of the wrapper you want to use
+    splitter: '/', // the symbol you want to use between the breadcrumb items
+    styles: {
+      items_gab: '5px', // margin between items
+      color: '#fff', // color of all the items
+      color_selected: '#000', // color of the current page/item
+      splitter_color: '#fff' // the color of the splitter
+    },
+    strings: {
+      home: 'Home' // home : to change the text in the first item
+    },
+    customElements: [ // customElements : if you want to use custom static elements 
+      { index: 1, text: 'firstElement', url: '#' }, // the custom element should be an object contains : index , text , url
+      { index: 2, text: 'secondElement', url: '#' },
+      { index: 3, text: 'thirdElement', url: '#' },
+      { index: 4, text: 'fourthElement', url: '#' },
+    ]
+  })
+<br />
 <br />
 See the [open issues](https://github.com/amans199/the-simplest-breadcrumb/issues) for a list of proposed features (and known issues).
 
