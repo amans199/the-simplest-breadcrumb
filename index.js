@@ -1,61 +1,53 @@
 function getBreadCrumbItems() {
-  var pathArray = window.location.pathname.split("/");
-  pathArray.shift();
-  pathArray.pop();
-  let allItemsBC = [],
-    pathLastIndex = location.pathname.substring(
-      location.pathname.lastIndexOf("/") + 1
-    ),
-    breadcrumbItems = [];
-  if (pathArray[0] != "") {
-    for (let ii = 0; ii <= pathArray.length; ii++) {
-      let pageName = pathArray[ii - 1],
-        prevPageName = pathArray[ii - 2],
-        AddToUrl;
-      if (
-        pageName != "" &&
-        pageName != undefined &&
-        prevPageName == undefined
-      ) {
-        AddToUrl = pageName + "/";
-      } else if (prevPageName != "" && prevPageName != undefined) {
-        AddToUrl = prevPageName + "/" + pageName + "/";
-      } else {
-        AddToUrl = "";
+  let currentUrl = window.location.pathname.split("/");
+
+  let breadcrumbItems = currentUrl.map((elem, index) => (
+    {
+      name: elem,
+      url: currentUrl.map((url, i) => (i < index + 1 ? url : '')).join("/"),
+      meta: {
+        label: elem.replace(/\-/g, ' '),
       }
-      var itemsBC = {
-        name: pathArray[ii],
-        url:
-          "http://" +
-          window.location.hostname +
-          "/" +
-          AddToUrl +
-          pathArray[ii],
-        meta: {
-          label: pathArray[ii]
-        }
-      };
-      allItemsBC.unshift(itemsBC);
     }
-    allItemsBC.shift();
-    allItemsBC.reverse();
-    breadcrumbItems = [...allItemsBC];
-  }
-  if (pathLastIndex != "") {
-    breadcrumbItems[breadcrumbItems.length] = {
-      name: pathLastIndex,
-      active: true
+  ));
+  // console.log(breadcrumbItems)
+
+  // observe in SPA 
+  window.onload = function () {
+    var bodyList = document.querySelector("html")
+      , observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+
+          currentUrl = window.location.pathname.split("/");
+
+          breadcrumbItems = currentUrl.map((elem, index) => (
+            {
+              name: elem,
+              url: currentUrl.map((url, i) => (i < index + 1 ? url : '')).join("/"),
+              meta: {
+                label: elem.replace(/\-/g, ' '),
+              }
+            }
+          ));
+          // console.log(breadcrumbItems)
+
+        });
+      });
+    var config = {
+      childList: true,
+      subtree: true
     };
-  }
+    observer.observe(bodyList, config);
+  };
+
+  // console.log(breadcrumbItems)
   return breadcrumbItems;
 }
 
 module.exports = async function (options) {
   await function () {
-    // console.log("breadcrumbMaster is working" + options.wrapper_id)
-    // console.log("document.body.contains(document.getElementById(options.wrapper_id))111" + document.body.contains(document.getElementById(options.wrapper_id)))
+    // 
   }
-
 
   if (options.wrapper_id) {
     // configure options.splitter if there is no splitter is passed in the options
@@ -111,7 +103,7 @@ module.exports = async function (options) {
 
           var breadcrumb199ListItem = document.createElement("li");
           breadcrumb199ListItem.className = "breadcrumb199__list--item";
-          breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' rel='noopener noreferr'>${breadcrumbItems[i].name}</a>` +
+          breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' rel='noopener noreferr'>${breadcrumbItems[i].meta.label}</a>` +
             "<div class='options-splitter'>" + options.splitter + "</div>";
           breadcrumb199List.appendChild(breadcrumb199ListItem);
         }
