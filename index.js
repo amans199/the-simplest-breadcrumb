@@ -10,37 +10,18 @@ function getBreadCrumbItems() {
       }
     }
   ));
-  // console.log(breadcrumbItems)
+  currentUrl = window.location.pathname.split("/");
 
-  // observe in SPA 
-  window.onload = function () {
-    var bodyList = document.querySelector("html")
-      , observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
+  breadcrumbItems = currentUrl.map((elem, index) => (
+    {
+      name: elem,
+      url: currentUrl.map((url, i) => (i < index + 1 ? url : '')).join("/"),
+      meta: {
+        label: elem.replace(/\-/g, ' '),
+      }
+    }
+  ));
 
-          currentUrl = window.location.pathname.split("/");
-
-          breadcrumbItems = currentUrl.map((elem, index) => (
-            {
-              name: elem,
-              url: currentUrl.map((url, i) => (i < index + 1 ? url : '')).join("/"),
-              meta: {
-                label: elem.replace(/\-/g, ' '),
-              }
-            }
-          ));
-          // console.log(breadcrumbItems)
-
-        });
-      });
-    var config = {
-      childList: true,
-      subtree: true
-    };
-    observer.observe(bodyList, config);
-  };
-
-  // console.log(breadcrumbItems)
   return breadcrumbItems;
 }
 
@@ -58,7 +39,7 @@ module.exports = async function (options) {
 
     if (document.body.contains(document.getElementById(options.wrapper_id))) {
       var breadcrumb199List = document.getElementById(options.wrapper_id);
-
+      breadcrumb199List.textContent = ""
       breadcrumb199List.style.listStyle = "none";
       breadcrumb199List.style.display = "flex";
 
@@ -72,12 +53,6 @@ module.exports = async function (options) {
             "<div class='options-splitter'>" + options.splitter + "</div>";
           breadcrumb199List.appendChild(breadcrumb199ListItem);
           return breadcrumb199ListItem;
-          // if (arr.length - 1 === i) {
-          //   // last one
-          // } else {
-          //   // not last one
-
-          // }
         })
 
       } else {
@@ -147,11 +122,7 @@ module.exports = async function (options) {
       Array.from(document.querySelectorAll(".breadcrumb199__list--item")).map(elem => {
         elem.style.display = 'flex'
       })
-
-
     }
   }
 }
-// window.onload = breadcrumbMaster();
-
 // module.exports.breadcrumbMaster = breadcrumbMaster;
