@@ -4,18 +4,9 @@ function getBreadCrumbItems() {
   let breadcrumbItems = currentUrl.map((elem, index) => (
     {
       name: elem,
-      url: currentUrl.map((url, i) => (i < index + 1 ? url : '')).join("/"),
-      meta: {
-        label: elem.replace(/\-/g, ' '),
-      }
-    }
-  ));
-  currentUrl = window.location.pathname.split("/");
-
-  breadcrumbItems = currentUrl.map((elem, index) => (
-    {
-      name: elem,
-      url: currentUrl.map((url, i) => (i < index + 1 ? url : '')).join("/"),
+      url: "/" + currentUrl.map((url, i) => (i < index + 1 ? url : '')).filter(function (el) {
+        return el !=='';
+      }).join("/"),
       meta: {
         label: elem.replace(/\-/g, ' '),
       }
@@ -57,6 +48,7 @@ module.exports = async function (options) {
 
       } else {
         let breadcrumbItems = [...getBreadCrumbItems()]
+
         if (options.strings.home) {
           breadcrumbItems[0] = {
             name: options.strings.home,
@@ -74,6 +66,44 @@ module.exports = async function (options) {
             }
           }
         }
+
+
+        // start test the replace strings 
+  
+
+      // Get the size of an object
+      Object.size = function(obj) {
+          var size = 0, key;
+          for (key in obj) {
+              if (obj.hasOwnProperty(key)) size++;
+          }
+          return size;
+      };
+      var stringsToChange = options.strings;
+      var size = Object.size(stringsToChange);
+        if (size > 0) {
+          for (key in stringsToChange) {
+            breadcrumbItems.forEach(element=> {
+              var index = breadcrumbItems.findIndex(p => p.name == key)
+              if(typeof breadcrumbItems[index] !== 'undefined'){
+                console.log(breadcrumbItems[index] )
+              breadcrumbItems[index] = {
+                    name:  stringsToChange[key],
+                    url:breadcrumbItems[index].url,
+                    meta: {
+                      label:  stringsToChange[key]
+                    }
+                  }
+                }
+            });
+          }
+        } 
+
+
+        // end test the replace strings 
+
+
+
         for (var i = 0; i < breadcrumbItems.length; i++) {
 
           var breadcrumb199ListItem = document.createElement("li");
