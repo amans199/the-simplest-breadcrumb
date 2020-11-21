@@ -1,6 +1,6 @@
 {
   "name": "the-simplest-breadcrumb",
-  "version": "1.5.1",
+  "version": "1.6.1",
   "description": "The simplest Breadcrumb you will ever use",
   "main": "index.js",
   "scripts": {
