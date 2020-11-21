@@ -48,6 +48,8 @@ import BreadcrumbMaster from 'the-simplest-breadcrumb'
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+<br />
+
   <a href="https://github.com/amans199/the-simplest-breadcrumb">
     <img src="images/screenshot.png" alt="Logo">
   </a>
@@ -79,11 +81,62 @@ just create any html tag eg: `ul` or `div` and with an id
       { index: 2, text: 'secondElement', url: '#' },
       { index: 3, text: 'thirdElement', url: '#' },
       { index: 4, text: 'fourthElement', url: '#' },
-    ]
+    ],
+       strings: { // it allows you to change any string you want in the dynamic breadcrumb
+        "home": 'Homee', // home : to change the text in the first item
+        "user": 'fvffvfvf',
+        "users-list": 'all User List', // the key is the slug , not the stripped-dashes text
+        "amans199": 'Amans Account'
+      },
   })
 ```
 <br />
+
+### Examples: 
+#### using the-simplest-breadcrumb with React 
+```
+ render(){
+    BreadcrumbMaster({
+      wrapper_id: 'breadcrumb199__test2', // the id of the wrapper you want to use
+      splitter: '/', // the symbol you want to use between the breadcrumb items
+      styles: {
+        items_gab: '5px', // margin between items
+        color: '#fff', // color of all the items
+        color_selected: 'red', // color of the current page/item
+        splitter_color: '#fff' // the color of the splitter
+      },
+      strings: {
+        "home": 'Homee', // home : to change the text in the first item
+        "user": 'fvffvfvf',
+        "users-list": 'all User List', // the key is the slug , not the stripped-dashes text
+        "amans199": 'Amans Account'
+      },
+    })
+    return (
+      <div className="App">
+        <header className="App-header">
+          <ul id="breadcrumb199__test2"></ul>
+        </header>
+      </div>
+    );
+  }
+
+```
 <br />
+if you are using React-router then please don't forget to add the breadcrumb component inside a Switch ..
+
+```
+      <Switch>
+           <App />
+      </Switch>
+```
+
+<hr />
+
+
+
+<br />
+
 See the [open issues](https://github.com/amans199/the-simplest-breadcrumb/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
