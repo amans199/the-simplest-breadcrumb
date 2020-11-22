@@ -73,9 +73,6 @@ just create any html tag eg: `ul` or `div` and with an id
       color_selected: '#000', // color of the current page/item
       splitter_color: '#fff' // the color of the splitter
     },
-    strings: {
-      home: 'Home' // home : to change the text in the first item
-    },
     customElements: [ // customElements : if you want to use custom static elements 
       { index: 1, text: 'firstElement', url: '#' }, // the custom element should be an object contains : index , text , url
       { index: 2, text: 'secondElement', url: '#' },
