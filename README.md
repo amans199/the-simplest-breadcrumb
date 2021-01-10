@@ -12,10 +12,10 @@
     <img src="images/logo.png" alt="Logo" width="80" >
   </a>
 
-  <h3 align="center">The simplest Breadcrumb you will ever use</h3>
+  <h3 align="center">The simplest Breadcrumb you always needed</h3>
 
   <p align="center">
-    Your website is just a one line away from having an awesome breadcrumb that actually WORKS
+    Your website is just a one line away from having an awesome dynamic breadcrumb that actually WORKS
     <br />
     <a href="https://github.com/amans199/the-simplest-breadcrumb"><strong>Explore the docs »</strong></a>
     <br />
@@ -31,82 +31,106 @@
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
-* [Installation](#installation)
-* [Usage](#usage)
+* [Installation and Usage](#usage)
+* [Options](#options)
+* [Use Cases](#use-cases)
+  * [plain javascript](#options)
+  * [React](#options)
+  * [Vue](#options)
+* [Notes](#notes)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
 
-### Installation
-
+## Installation and Usage
+1- Installing
 ```sh
 npm install the-simplest-breadcrumb --save
 ```
+2- Import it 
 ```sh
 import BreadcrumbMaster from 'the-simplest-breadcrumb'
 ```
+3- Add any wrapper tag to html 
+```sh
+<ul id="breadcrumb199__list"></ul>
+```
+4- Add this to your script
+```sh
+  BreadcrumbMaster({
+    wrapper_id: 'breadcrumb199__list', 
+    splitter: '/', 
+    strings: {
+        home: "Home", 
+      },
+  });
+```
 
-<!-- USAGE EXAMPLES -->
-## Usage
+
+## Options
+1. wrapper_id: (*Required*) => this the id for the breadcrumb's wrapper tag in your html... just like `breadcrumb199__list` in `<ul id="breadcrumb199__list"></ul>`
+
+2. splitter: the symbol you want to use between the breadcrumb items
+
+3.  styles: just the basics:
+    1. items_gab: margin between items
+    1. color: the color of the breadcrumb's items
+    1. color_selected: the color of the breadcrumb's items
+    1. splitter_color: the color of of the splitter between the items
+
+4. customElements: an array of static items, just in case you want your breadcrumb to be static.
+
+5.strings: an object that contains any string you want to change in the breadcrumb... the first item have to be `home: "Home"` always.
+
+
+
+## Use Cases
 <br />
 
   <a href="https://github.com/amans199/the-simplest-breadcrumb">
     <img src="images/screenshot.png" alt="Logo">
   </a>
 
-
-just create any html tag eg: `ul` or `div` and with an id
 <br />
 
- `<ul id="breadcrumb199__list"></ul>`
-<br />
-<br />
-**then** Use it as below
-<br />
-```
+1. #### using the-simplest-breadcrumb in plain javascript to show a static breadcrumb
+
+```sh
   BreadcrumbMaster({
-    wrapper_id: 'breadcrumb199__list', // the id of the wrapper you want to use
-    splitter: '/', // the symbol you want to use between the breadcrumb items
+    wrapper_id: 'breadcrumb199__list',
+    splitter: '/',
     styles: {
-      items_gab: '5px', // margin between items
-      color: '#fff', // color of all the items
-      color_selected: '#000', // color of the current page/item
-      splitter_color: '#fff' // the color of the splitter
+      items_gab: '5px', 
+      color: '#fff',
+      color_selected: '#000', 
+      splitter_color: '#fff'
     },
-    customElements: [ // customElements : if you want to use custom static elements 
-      { index: 1, text: 'firstElement', url: '#' }, // the custom element should be an object contains : index , text , url
+    customElements: [ 
+      { index: 1, text: 'firstElement', url: '#' }, 
       { index: 2, text: 'secondElement', url: '#' },
       { index: 3, text: 'thirdElement', url: '#' },
       { index: 4, text: 'fourthElement', url: '#' },
     ],
-       strings: { // it allows you to change any string you want in the dynamic breadcrumb
-        "home": 'Homee', // home : to change the text in the first item
-        "user": 'fvffvfvf',
-        "users-list": 'all User List', // the key is the slug , not the stripped-dashes text
-        "amans199": 'Amans Account'
-      },
   })
 ```
 <br />
 
-### Examples: 
-#### using the-simplest-breadcrumb with React 
-```
+2. #### using the-simplest-breadcrumb with **React** to show a multilang dynamic breadcrumb
+```sh
  render(){
     BreadcrumbMaster({
-      wrapper_id: 'breadcrumb199__test2', // the id of the wrapper you want to use
-      splitter: '/', // the symbol you want to use between the breadcrumb items
+      wrapper_id: 'breadcrumb199__test2',
+      splitter: '/', 
       styles: {
-        items_gab: '5px', // margin between items
-        color: '#fff', // color of all the items
-        color_selected: 'red', // color of the current page/item
-        splitter_color: '#fff' // the color of the splitter
+        items_gab: '5px', 
+        color: '#fff',
+        color_selected: '#000', 
+        splitter_color: '#fff'
       },
       strings: {
-        "home": 'Homee', // home : to change the text in the first item
-        "user": 'fvffvfvf',
-        "users-list": 'all User List', // the key is the slug , not the stripped-dashes text
-        "amans199": 'Amans Account'
+        home: "Home", 
+        user: "المستخدم",
+        "users-list": "用户列表",
       },
     })
     return (
@@ -120,7 +144,8 @@ just create any html tag eg: `ul` or `div` and with an id
 
 ```
 <br />
-if you are using React-router then please don't forget to add the breadcrumb component inside a Switch ..
+
+* if you are using React-router then please don't forget to add the breadcrumb component inside a Switch ..
 
 ```
       <Switch>
@@ -129,12 +154,44 @@ if you are using React-router then please don't forget to add the breadcrumb com
 ```
 
 <hr />
+----------------
 
+3. #### using the-simplest-breadcrumb with **Vue** to show a multilang dynamic breadcrumb
+```sh
+data(){
+  return{
+    userString:"User String"
+  };
+},
+ mounted(){
+    BreadcrumbMaster({
+      wrapper_id: 'breadcrumb199__test2',
+      splitter: ">", 
+      styles: {
+        items_gab: '5px', 
+        color: '#fff',
+        color_selected: '#000', 
+        splitter_color: '#fff'
+      },
+      strings: {
+        home: "Home", 
+        user: this.userString,
+        "users-list": "用户列表",
+      },
+    })
+  }
+
+```
+<br />
+
+## Notes
+1. all the elements of the breadcrumb are injected to DOM in a way that makes it really easy tto be styled using plain css.
+2. the-simplest-breadcrumb can be used with any type of application ( SPA or not SPA), and any type of javascript framework... whenever you place it in the right lifecycle, it will get the job done perfectly.
 
 
 <br />
 
-See the [open issues](https://github.com/amans199/the-simplest-breadcrumb/issues) for a list of proposed features (and known issues).
+
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -147,7 +204,7 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
+See the [open issues](https://github.com/amans199/the-simplest-breadcrumb/issues) for a list of proposed features (and known issues).
 
 <!-- LICENSE -->
 ## License

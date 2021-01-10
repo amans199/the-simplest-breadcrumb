@@ -1,7 +1,7 @@
 {
   "name": "the-simplest-breadcrumb",
-  "version": "1.6.2",
-  "description": "The simplest Breadcrumb you will ever use",
+  "version": "1.6.3",
+  "description": "The simplest Breadcrumb you always needed",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,9 @@
     "url": "git+https://github.com/amans199/the-simplest-breadcrumb.git"
   },
   "keywords": [
-    "breadcrumb"
+    "breadcrumb",
+    "dynamic-breadcrumb",
+    "simple-dynamic-breadcrumb"
   ],
   "author": "Ahmed Mansour ( amans199 )",
   "license": "ISC",
