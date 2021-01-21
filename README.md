@@ -67,12 +67,15 @@ import BreadcrumbMaster from 'the-simplest-breadcrumb'
 ```
 
 
-## Options
-1. wrapper_id: (*Required*) => this the id for the breadcrumb's wrapper tag in your html... just like `breadcrumb199__list` in `<ul id="breadcrumb199__list"></ul>`
+## features
 
-2. splitter: the symbol you want to use between the breadcrumb items
+1. **wrapper_id**: (*Required*) 
+this the id for the breadcrumb's wrapper tag in your html... just like `breadcrumb199__list` in `<ul id="breadcrumb199__list"></ul>`
 
-3.  styles: just the basics:
+2. **splitter**:
+ the symbol you want to use between the breadcrumb items... if not provided, the  " forwardslash /" will be used.
+
+3.  **styles**: 
     1. items_gab: margin between items
     1. color: the color of the breadcrumb's items
     1. color_selected: the color of the breadcrumb's items
@@ -80,8 +83,24 @@ import BreadcrumbMaster from 'the-simplest-breadcrumb'
 
 4. customElements: an array of static items, just in case you want your breadcrumb to be static.
 
-5.strings: an object that contains any string you want to change in the breadcrumb... the first item have to be `home: "Home"` always.
+5.**strings**:
+ an object that contains any string you want to change in the breadcrumb... the first item have to be `home: "Home"` always.
 
+6. **exceptions_list**:
+    an array of objects containing the pages you want to add a customElements in it instead of the breadcrumb's default behaviour.
+    example : 
+    ```
+   exceptions_list:[
+        {
+         page:"user",
+        customElements: [ 
+          { index: 2, text: 'loremFirst', url: '#loremFirst' },
+          { index: 3, text: 'loremSecond', url: '#loremSecond' },
+          { index: 4, text: 'loremThird', url: '/amans199' },
+        ],
+      }
+    ]
+    ```
 
 
 ## Use Cases
@@ -111,6 +130,16 @@ import BreadcrumbMaster from 'the-simplest-breadcrumb'
       { index: 3, text: 'thirdElement', url: '#' },
       { index: 4, text: 'fourthElement', url: '#' },
     ],
+    exceptions_list:[
+        {
+         page:"user",
+        customElements: [ 
+          { index: 2, text: 'loremFirst', url: '#loremFirst' },
+          { index: 3, text: 'loremSecond', url: '#loremSecond' },
+          { index: 4, text: 'loremThird', url: '/amans199' },
+        ],
+      },
+      ]
   })
 ```
 <br />
@@ -132,6 +161,16 @@ import BreadcrumbMaster from 'the-simplest-breadcrumb'
         user: "المستخدم",
         "users-list": "用户列表",
       },
+      exceptions_list:[
+        {
+         page:"user",
+        customElements: [ 
+          { index: 2, text: 'loremFirst', url: '#loremFirst' },
+          { index: 3, text: 'loremSecond', url: '#loremSecond' },
+          { index: 4, text: 'loremThird', url: '/amans199' },
+        ],
+      },
+      ]
     })
     return (
       <div className="App">
@@ -178,6 +217,16 @@ data(){
         user: this.userString,
         "users-list": "用户列表",
       },
+    exceptions_list:[
+        {
+         page:"user",
+        customElements: [ 
+          { index: 2, text: 'loremFirst', url: '#loremFirst' },
+          { index: 3, text: 'loremSecond', url: '#loremSecond' },
+          { index: 4, text: 'loremThird', url: '/amans199' },
+        ],
+      },
+      ]
     })
   }
 
