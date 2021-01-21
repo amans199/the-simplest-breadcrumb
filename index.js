@@ -1,11 +1,11 @@
 function getBreadCrumbItems() {
   let currentUrl = window.location.pathname.split("/");
 
-  let breadcrumbItems = currentUrl.map((elem, index) => (
+  let breadcrumbItems = currentUrl.map((elem, j) => (
     {
-      id:  elem.replace(/\-/g, '_').toString(),
-      name: elem,
-      url: "/" + currentUrl.map((url, i) => (i < index + 1 ? url : '')).filter(function (el) {
+    index:  elem.replace(/\-/g, '_').toString(),
+    text: elem,
+      url: "/" + currentUrl.map((url, i) => (i < j + 1 ? url : '')).filter(function (el) {
         return el !=='';
       }).join("/"),
       meta: {
@@ -16,61 +16,75 @@ function getBreadCrumbItems() {
   return breadcrumbItems;
 }
 
+
+
 module.exports = async function (options) {
   await function () {
     // 
   }
 
-  if (options.wrapper_id) {
-    // configure options.splitter if there is no splitter is passed in the options
+  if (!options.wrapper_id || !document.body.contains(document.getElementById(options.wrapper_id))) {
+    return;
+  }
+
+    //================ INITIAL CONFIGURATION ================
     if (!options.splitter) {
       options.splitter = '/'
     }
+    
+
+    var breadcrumb199List = document.getElementById(options.wrapper_id);
+    breadcrumb199List.textContent = ""
+    breadcrumb199List.style.listStyle = "none";
+    breadcrumb199List.style.display = "flex";
+    //==================================================
 
 
-    if (document.body.contains(document.getElementById(options.wrapper_id))) {
-      var breadcrumb199List = document.getElementById(options.wrapper_id);
-      breadcrumb199List.textContent = ""
-      breadcrumb199List.style.listStyle = "none";
-      breadcrumb199List.style.display = "flex";
-
-
-      if (options.customElements) {
-
-        options.customElements.map((content, i, arr) => {
-          var breadcrumb199ListItem = document.createElement("li");
-          breadcrumb199ListItem.className = "breadcrumb199__list--item";
-          breadcrumb199ListItem.innerHTML = `<a href='${content.url}' class='breadcrumb_item__${content.i}'>${content.text}</a>` +
-            "<div class='options-splitter'>" + options.splitter + "</div>";
-          breadcrumb199List.appendChild(breadcrumb199ListItem);
-          return breadcrumb199ListItem;
-        })
-
-      } else {
-        let breadcrumbItems = [...getBreadCrumbItems()]
-
+      function structureBreadcrumb() {
+        let breadcrumbItems = [...getBreadCrumbItems()];
+        breadcrumbItems[0] = {
+          index: "home",
+          text: "Home",
+          url: "/",
+          meta: {
+            label: "Home"
+          }
+        }
+        let currentUrl = window.location.pathname.split("/");
+        if (options.customElements) {
+           breadcrumbItems = [...options.customElements];
+        }
+        if (options.exceptions_list) {
+          options.exceptions_list.map((ele,index)=>((ele.page ===currentUrl[currentUrl.length-1] && ele.customElements) ?  breadcrumbItems = [...ele.customElements] : '' ))
+        }
+        let breadcrumbStructure = breadcrumbItems.map((elem, index) => (
+          {
+            ...elem,
+            pages:[
+            ]
+          }
+        ));
+      
         if (options.strings.home) {
           breadcrumbItems[0] = {
-            id: "home",
-            name: options.strings.home,
+            index: "home",
+            text: options.strings.home,
             url: "/",
             meta: {
               label: options.strings.home
             }
           }
-        } else {
-          breadcrumbItems[0] = {
-            id: "home",
-            name: "Home",
-            url: "/",
-            meta: {
-              label: "Home"
-            }
-          }
         }
+        
+        return breadcrumbStructure;
+      }
+      let breadcrumbItems = [...structureBreadcrumb()]
 
 
-        // start test the replace strings 
+
+
+
+        // OPTION :  replace strings 
 
       // Get the size of an object
       Object.size = function(obj) {
@@ -85,12 +99,11 @@ module.exports = async function (options) {
         if (size > 0) {
           for (key in stringsToChange) {
             breadcrumbItems.forEach(element=> {
-              var index = breadcrumbItems.findIndex(p => p.name == key)
+              var index = breadcrumbItems.findIndex(p => p.text == key)
               if(typeof breadcrumbItems[index] !== 'undefined'){
-                // console.log(breadcrumbItems[index] )
               breadcrumbItems[index] = {
-                id:breadcrumbItems[index].id,
-                    name:  stringsToChange[key],
+                index:breadcrumbItems[index].id,
+                    text:  stringsToChange[key],
                     url:breadcrumbItems[index].url,
                     meta: {
                       label:  stringsToChange[key]
@@ -102,23 +115,19 @@ module.exports = async function (options) {
         } 
 
 
-        // end test the replace strings 
-
-// console.log(breadcrumbItems)
 
         for (var i = 0; i < breadcrumbItems.length; i++) {
           var breadcrumb199ListItem = document.createElement("li");
           breadcrumb199ListItem.className = "breadcrumb199__list--item";
-          breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' class='breadcrumb_item__${breadcrumbItems[i].id}'>${breadcrumbItems[i].meta.label}</a>` +
-            "<div class='options-splitter'>" + options.splitter + "</div>";
+          breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' class='breadcrumb_item__${breadcrumbItems[i].index}'>${breadcrumbItems[i].text}</a>` +
+            `<div class='options-splitter splitter__${breadcrumbItems[i].index}'>${ options.splitter }</div>`;
           if(i ===  breadcrumbItems.length-1){
-            breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' class='breadcrumb_item__${breadcrumbItems[i].id} active_breadcrumb_item'>${breadcrumbItems[i].meta.label}</a>` +
+            breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' class='breadcrumb_item__${breadcrumbItems[i].index} active_breadcrumb_item'>${breadcrumbItems[i].text}</a>` +
                       "<div class='options-splitter'>" + options.splitter + "</div>";
           }
 
           breadcrumb199List.appendChild(breadcrumb199ListItem);
         }
-      }
 
 
       // configure the items_gab of the breadcrumb elements 
@@ -150,15 +159,9 @@ module.exports = async function (options) {
       }
 
 
-
-
-
-      // configure ititial styles 
+      // configure Alignment 
       document.querySelector(".breadcrumb199__list--item:last-child .options-splitter").remove()
       Array.from(document.querySelectorAll(".breadcrumb199__list--item")).map(elem => {
         elem.style.display = 'flex'
       })
-    }
-  }
 }
-// module.exports.breadcrumbMaster = breadcrumbMaster;
