@@ -3,16 +3,16 @@ function getBreadCrumbItems() {
 
   let breadcrumbItems = currentUrl.map((elem, index) => (
     {
+      id:  elem.replace(/\-/g, '_').toString(),
       name: elem,
       url: "/" + currentUrl.map((url, i) => (i < index + 1 ? url : '')).filter(function (el) {
         return el !=='';
       }).join("/"),
       meta: {
-        label: elem.replace(/\-/g, ' '),
+        label: elem.replace(/\-/g, ' ')
       }
     }
   ));
-
   return breadcrumbItems;
 }
 
@@ -40,7 +40,7 @@ module.exports = async function (options) {
         options.customElements.map((content, i, arr) => {
           var breadcrumb199ListItem = document.createElement("li");
           breadcrumb199ListItem.className = "breadcrumb199__list--item";
-          breadcrumb199ListItem.innerHTML = `<a href='${content.url}' rel='noopener noreferr'>${content.text}</a>` +
+          breadcrumb199ListItem.innerHTML = `<a href='${content.url}' class='breadcrumb_item__${content.i}'>${content.text}</a>` +
             "<div class='options-splitter'>" + options.splitter + "</div>";
           breadcrumb199List.appendChild(breadcrumb199ListItem);
           return breadcrumb199ListItem;
@@ -51,6 +51,7 @@ module.exports = async function (options) {
 
         if (options.strings.home) {
           breadcrumbItems[0] = {
+            id: "home",
             name: options.strings.home,
             url: "/",
             meta: {
@@ -59,17 +60,17 @@ module.exports = async function (options) {
           }
         } else {
           breadcrumbItems[0] = {
-            name: window.location.hostname,
+            id: "home",
+            name: "Home",
             url: "/",
             meta: {
-              label: window.location.hostname
+              label: "Home"
             }
           }
         }
 
 
         // start test the replace strings 
-  
 
       // Get the size of an object
       Object.size = function(obj) {
@@ -86,8 +87,9 @@ module.exports = async function (options) {
             breadcrumbItems.forEach(element=> {
               var index = breadcrumbItems.findIndex(p => p.name == key)
               if(typeof breadcrumbItems[index] !== 'undefined'){
-                console.log(breadcrumbItems[index] )
+                // console.log(breadcrumbItems[index] )
               breadcrumbItems[index] = {
+                id:breadcrumbItems[index].id,
                     name:  stringsToChange[key],
                     url:breadcrumbItems[index].url,
                     meta: {
@@ -102,14 +104,18 @@ module.exports = async function (options) {
 
         // end test the replace strings 
 
-
+// console.log(breadcrumbItems)
 
         for (var i = 0; i < breadcrumbItems.length; i++) {
-
           var breadcrumb199ListItem = document.createElement("li");
           breadcrumb199ListItem.className = "breadcrumb199__list--item";
-          breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' rel='noopener noreferr'>${breadcrumbItems[i].meta.label}</a>` +
+          breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' class='breadcrumb_item__${breadcrumbItems[i].id}'>${breadcrumbItems[i].meta.label}</a>` +
             "<div class='options-splitter'>" + options.splitter + "</div>";
+          if(i ===  breadcrumbItems.length-1){
+            breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' class='breadcrumb_item__${breadcrumbItems[i].id} active_breadcrumb_item'>${breadcrumbItems[i].meta.label}</a>` +
+                      "<div class='options-splitter'>" + options.splitter + "</div>";
+          }
+
           breadcrumb199List.appendChild(breadcrumb199ListItem);
         }
       }
