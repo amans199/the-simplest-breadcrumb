@@ -64,7 +64,7 @@ module.exports = async function (options) {
             ]
           }
         ));
-      
+      if(options.strings){
         if (options.strings.home) {
           breadcrumbItems[0] = {
             index: "home",
@@ -75,7 +75,7 @@ module.exports = async function (options) {
             }
           }
         }
-        
+      }
         return breadcrumbStructure;
       }
       let breadcrumbItems = [...structureBreadcrumb()]
@@ -131,6 +131,7 @@ module.exports = async function (options) {
 
 
       // configure the items_gab of the breadcrumb elements 
+      if(options.styles){
       if (options.styles.items_gab) {
         Array.from(document.querySelectorAll(".breadcrumb199__list--item .options-splitter")).map(elem => {
           elem.style.marginRight = options.styles.items_gab;
@@ -158,7 +159,7 @@ module.exports = async function (options) {
         document.querySelector(".breadcrumb199__list--item:last-child a").setAttribute('style', 'color:' + options.styles.color_selected);
       }
 
-
+    }
       // configure Alignment 
       document.querySelector(".breadcrumb199__list--item:last-child .options-splitter").remove()
       Array.from(document.querySelectorAll(".breadcrumb199__list--item")).map(elem => {
