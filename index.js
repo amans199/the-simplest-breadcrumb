@@ -85,7 +85,8 @@ module.exports = async function (options) {
 
 
         // OPTION :  replace strings 
-
+        // todo : fix the functionality of string to be replaced : ( it doesn't change in some cases)
+if(options.strings){
       // Get the size of an object
       Object.size = function(obj) {
           var size = 0, key;
@@ -113,24 +114,42 @@ module.exports = async function (options) {
             });
           }
         } 
+      }
 
+        function getBaseUrl() {
+          var getUrl = window.location;
+          let baseUrl = ""
+          getUrl.protocol ? baseUrl  += getUrl .protocol  + "//":""
+          getUrl.host ? baseUrl  += getUrl.host : ""
+          return baseUrl
+      }
 
+        function redirection_handler(elem_url,spa){
+    //  todo : fix spa behaviour
+          if(spa){
+            history.replaceState(history.state, null, elem_url);
+          }else{
+            window.location.href = getBaseUrl( ) + elem_url;
+          }
+
+        }
 
         for (var i = 0; i < breadcrumbItems.length; i++) {
           var breadcrumb199ListItem = document.createElement("li");
           breadcrumb199ListItem.className = "breadcrumb199__list--item";
-          breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' class='breadcrumb_item__${breadcrumbItems[i].index}'>${breadcrumbItems[i].text}</a>` +
+          breadcrumb199ListItem.innerHTML = `<a role="button" class='breadcrumb_item__${breadcrumbItems[i].index} ${i ===  breadcrumbItems.length-1 ? 'active_breadcrumb_item' : ''}'>${breadcrumbItems[i].text}</a>` +
             `<div class='options-splitter splitter__${breadcrumbItems[i].index}'>${ options.splitter }</div>`;
-          if(i ===  breadcrumbItems.length-1){
-            breadcrumb199ListItem.innerHTML = `<a href='${breadcrumbItems[i].url}' class='breadcrumb_item__${breadcrumbItems[i].index} active_breadcrumb_item'>${breadcrumbItems[i].text}</a>` +
-                      "<div class='options-splitter'>" + options.splitter + "</div>";
-          }
+              (function () {
+                var url = breadcrumbItems[i].url;
+                var spa_app = options.spa_app? options.spa_app:false;
 
+            breadcrumb199ListItem.addEventListener('click', function(){ redirection_handler(url,spa_app)})
+          }()); 
           breadcrumb199List.appendChild(breadcrumb199ListItem);
         }
 
 
-      // configure the items_gab of the breadcrumb elements 
+      // configure the Styles of the breadcrumb 
       if(options.styles){
       if (options.styles.items_gab) {
         Array.from(document.querySelectorAll(".breadcrumb199__list--item .options-splitter")).map(elem => {
@@ -164,5 +183,6 @@ module.exports = async function (options) {
       document.querySelector(".breadcrumb199__list--item:last-child .options-splitter").remove()
       Array.from(document.querySelectorAll(".breadcrumb199__list--item")).map(elem => {
         elem.style.display = 'flex'
+        elem.style.cursor = 'pointer'
       })
 }
