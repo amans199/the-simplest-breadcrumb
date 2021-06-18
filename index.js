@@ -1,18 +1,13 @@
 function getBreadCrumbItems() {
-  let currentUrl = window.location.pathname.split("/");
-
-  let breadcrumbItems = currentUrl.map((elem, j) => (
-    {
+  let currentUrl = decodeURIComponent(window.location.pathname).split("/");
+  let breadcrumbItems = currentUrl.map((elem, j) => ({
     index:  elem.replace(/\-/g, '_').toString(),
     text: elem,
-      url: "/" + currentUrl.map((url, i) => (i < j + 1 ? url : '')).filter(function (el) {
-        return el !=='';
-      }).join("/"),
+      url: "/" + currentUrl.map((url, i) => (i < j + 1 ? url : '')).filter((el) => el !=='').join("/"),
       meta: {
         label: elem.replace(/\-/g, ' ')
       }
-    }
-  ));
+    }));
   return breadcrumbItems;
 }
 
@@ -79,7 +74,6 @@ module.exports = async function (options) {
         return breadcrumbStructure;
       }
       let breadcrumbItems = [...structureBreadcrumb()]
-
 
 
 
