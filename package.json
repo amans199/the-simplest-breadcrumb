@@ -20,5 +20,7 @@
   "bugs": {
     "url": "https://github.com/amans199/the-simplest-breadcrumb/issues"
   },
-  "homepage": "https://github.com/amans199/the-simplest-breadcrumb#readme"
+  "homepage": "https://github.com/amans199/the-simplest-breadcrumb#readme",
+  "dependencies": {},
+  "devDependencies": {}
 }

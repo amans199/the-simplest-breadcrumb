@@ -8,9 +8,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/amans199/the-simplest-breadcrumb">
-    <img src="images/logo.png" alt="Logo" width="80" >
-  </a>
 
   <h3 align="center">The simplest Breadcrumb you always needed</h3>
 
@@ -104,12 +101,6 @@ this the id for the breadcrumb's wrapper tag in your html... just like `breadcru
 
 
 ## Use Cases
-<br />
-
-  <a href="https://github.com/amans199/the-simplest-breadcrumb">
-    <img src="images/screenshot.png" alt="Logo">
-  </a>
-
 <br />
 
 1. #### using the-simplest-breadcrumb in plain javascript to show a static breadcrumb
