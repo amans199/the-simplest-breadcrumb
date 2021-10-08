@@ -13,9 +13,9 @@ function getBreadCrumbItems() {
 export default async function BreadcrumbMaster(options) {
   await
 
-  function () {
-    // 
-  }
+    function () {
+      // 
+    }
 
   if (!options.wrapper_id || !document.body.contains(document.getElementById(options.wrapper_id))) {
     return;
@@ -46,7 +46,14 @@ export default async function BreadcrumbMaster(options) {
       breadcrumbItems = [...options.customElements];
     }
     if (options.exceptions_list) {
-      options.exceptions_list.map((ele, index) => ((ele.page === currentUrl[currentUrl.length - 1] && ele.customElements) ? breadcrumbItems = [...ele.customElements] : ''))
+      options.exceptions_list.map((ele, index) => {
+        const pageURL = ele.page.split('/')
+        const URL = currentUrl.slice(currentUrl.length - pageURL.length).join('/')
+        if (ele.page === URL) {
+          breadcrumbItems = [...ele.customElements]
+        }
+      }
+      )
     }
     let breadcrumbStructure = breadcrumbItems.map((elem, index) => ({
       ...elem,
@@ -118,8 +125,8 @@ export default async function BreadcrumbMaster(options) {
   for (var i = 0; i < breadcrumbItems.length; i++) {
     var breadcrumb199ListItem = document.createElement("li");
     breadcrumb199ListItem.className = "breadcrumb199__list--item";
-    breadcrumb199ListItem.innerHTML = `<a role="button" class='breadcrumb_item__${breadcrumbItems[i].index} ${i ===  breadcrumbItems.length-1 ? 'active_breadcrumb_item' : ''}'>${breadcrumbItems[i].text}</a>` +
-      `<div class='options-splitter splitter__${breadcrumbItems[i].index}'>${ options.splitter }</div>`;
+    breadcrumb199ListItem.innerHTML = `<a role="button" class='breadcrumb_item__${breadcrumbItems[i].index} ${i === breadcrumbItems.length - 1 ? 'active_breadcrumb_item' : ''}'>${breadcrumbItems[i].text}</a>` +
+      `<div class='options-splitter splitter__${breadcrumbItems[i].index}'>${options.splitter}</div>`;
     (function () {
       var url = breadcrumbItems[i].url;
       var spa_app = options.spa_app ? options.spa_app : false;
